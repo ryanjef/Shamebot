@@ -15,6 +15,7 @@ SLACK_INCOMING_WEBHOOK_URL = os.environ['SLACK_INCOMING_WEBHOOK_URL']
 @app.route('/webhook', methods=['POST'])
 def webhook():
     token = request.form.get('token')
+    app.logger.info(token)
     if not SLACK_OUTGOING_WEBHOOK_TOKEN or token == SLACK_OUTGOING_WEBHOOK_TOKEN:
         shamer = '@%s' % request.form.get('user_name')
         shamee = request.form.get('text')
